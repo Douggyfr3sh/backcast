@@ -5,14 +5,18 @@ var SearchView = Backbone.View.extend({
     'keyup input': 'handleKeyUp'
   },
 
-  performSearch: function() {
+  performSearch: function(shouldNotEmpty) {
     this.collection.search(this.$('input').val().trim());
-    this.$('input').val('');
+    if (!shouldNotEmpty) {
+      this.$('input').val('');
+    }
   },
 
   handleKeyUp: function (e) {
-    if(e.keyCode === 13) {
-      this.performSearch();
+    if (e.keyCode === 13) {
+      this.performSearch(false);
+    } else {
+      this.performSearch(true);
     }
   },
 
