@@ -174,6 +174,7 @@ var AppView = Backbone.View.extend({
   initialize: function() {
     var r = sampleData;
     this.videos = new Videos(sampleData);
+    this.videos.search('default');
     this.render();
   },
 
@@ -185,6 +186,12 @@ var AppView = Backbone.View.extend({
 
     //render a new VideoPlayerView
     new VideoPlayerView({collection: this.videos, el: this.$('.player')
+    }).render();
+
+    //render a new SearchView
+    new SearchView ({
+      collection: this.videos,
+      el: this.$('.search')
     }).render();
 
     return this;
